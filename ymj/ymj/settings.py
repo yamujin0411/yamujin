@@ -31,7 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 LOCAL_APPS = [
-    "user.apps.UserConfig",
+    "user",
+    "ninja",
+    "rest_framework",
+    "rest_framework_simplejwt.token_blacklist",
 ]
 
 INSTALLED_APPS = [
@@ -41,7 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-]
+] + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -124,3 +127,12 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# 인증 백엔드 설정
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
+AUTH_USER_MODEL = "user.User"
